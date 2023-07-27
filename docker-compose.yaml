@@ -1,0 +1,116 @@
+version: '3'
+services:
+  ds-notebook:
+    build:
+      context: ./installation/
+      dockerfile: jupyter
+    volumes:
+      - "./jupyter/:/home/jovyan/work/"
+    ports:
+      - 8888:8888
+    user: root
+    environment:
+      CHOWN_HOME: "yes"
+      CHOWN_HOME_OPTS: -R
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+      MLFLOW_SITE_URL: ${MLFLOW_SITE_URL}
+      MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
+      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+      # PREFECT_API_URL: ${PREFECT_AGENT_API_URL}
+    container_name: "jupyter_notebook"
+    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
+
+  # prefect-server:
+  #   image: prefecthq/prefect:2.10.13-python3.10
+  #   container_name: "prefect_server"
+  #   volumes:
+  #     - ./prefect_data:/root/.prefect
+  #   entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
+  #   environment:
+  #     PREFECT_UI_URL: ${PREFECT_UI_URL}
+  #     PREFECT_API_URL: ${PREFECT_API_URL}
+  #     PREFECT_SERVER_API_HOST: ${PREFECT_SERVER_API_HOST}
+  #     PREFECT_API_DATABASE_CONNECTION_URL: ${PREFECT_API_DATABASE_CONNECTION_URL}
+  #   ports:
+  #     - 4200:4200
+  #   depends_on:
+  #     - prefect-db
+
+  # prefect-agent:
+  #   build:
+  #     context: .
+  #     dockerfile: ./prefect/Dockerfile
+  #   container_name: "prefect_agent"
+  #   entrypoint: ["prefect", "agent", "start", "-q", "green-taxi"]
+  #   environment:
+  #     MLFLOW_SITE_URL: ${MLFLOW_SITE_URL}
+  #     MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
+  #     AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
+  #     AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+  #     PREFECT_API_URL: ${PREFECT_AGENT_API_URL}
+
+  mlflow:
+    build:
+      context: ./installation/
+      dockerfile: mlflow
+    container_name: "mlflow_server"
+    ports:
+      - 5000:5000
+    environment:
+      BACKEND_URI: ${BACKEND_URI}
+      MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
+      ARTIFACT_ROOT: ${ARTIFACT_ROOT}
+      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+    depends_on:
+      - postgres
+      - minio
+
+  postgres:
+    image: postgres:14
+    container_name: "mlflow_postgres"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    expose:
+      - 5432
+    
+  # prefect-db:
+  #   image: postgres:14
+  #   container_name: "prefect-db"
+  #   environment:
+  #     POSTGRES_USER: ${PREFECT_DB_USER}
+  #     POSTGRES_PASSWORD: ${PREFECT_DB_PASSWORD}
+  #     POSTGRES_DB: ${PREFECT_DB}
+  #   volumes:
+  #     - ./prefect_db_data:/var/lib/postgresql/data
+  #   expose:
+  #     - 5432
+
+  minio:
+    image: minio/minio
+    container_name: "mlflow_minio"
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - "./volumes/minio:/data"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server --console-address ":9001" /data
+
+volumes:
+  minio_data:
+    driver: local
+  postgres_data:
+    driver: local
+  # prefect_data:
+  #   driver: local
+  # prefect_db_data:
+  #   driver: local
