@@ -99,5 +99,5 @@ if __name__ == "__main__":
 
     df = read_from_s3(bucket_name=S3_BUCKET_NAME, filename=FILENAME)
     X_train, X_test, y_train, y_test = \
-    train_test_split(df[FEATURES], df[TARGET], random_state=SEED)
+        train_test_split(df[FEATURES], df[TARGET], random_state=SEED)
     run_optimization(n_trials=n_trials)
