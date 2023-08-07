@@ -1,0 +1,49 @@
+# prefect artifacts
+.prefectignore
+
+# python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+
+# Type checking artifacts
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# IPython
+profile_default/
+ipython_config.py
+*.ipynb_checkpoints/*
+*.ipynb_checkpoints/
+*.ipynb
+
+# Environments
+.python-version
+.env
+.venv
+env/
+venv/
+
+# MacOS
+.DS_Store
+
+# Dask
+dask-worker-space/
+
+# Editors
+.idea/
+.vscode/
+
+# VCS
+.git/
+.hg/
+
+# Unnecessary files in ./scripts
+/scripts/download_data.py
+/scripts/register_deployment.py
+/scripts/register_minio_block.py
+/scripts/main_flow_deployment.yaml

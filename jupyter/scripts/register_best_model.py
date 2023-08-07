@@ -115,7 +115,12 @@ def register_best_model(
 
 
 @prefect.flow(name="Main Registration Flow")
-def main_flow(bucket_name, filename, target, features, experiment_name):
+def main_flow(
+    bucket_name: str = S3_BUCKET_NAME,
+    filename: str = FILENAME,
+    target: str = TARGET,
+    features: list = FEATURES,
+    experiment_name: str = EXPERIMENT_NAME) -> None:
     X_train, X_test, y_train, y_test = \
         prepare_data(
             bucket_name=bucket_name,
