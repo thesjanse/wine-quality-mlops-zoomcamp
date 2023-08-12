@@ -74,5 +74,7 @@ There is an integration test for prediction service. In order to run the tests y
 ## Known issues
 On linux ds-notebook container might not start because of privileges issue. If you encounter this problem you need to change ownership of the jupyter folder to the docker user with the command ```sudo chown -R 100999:100099 ./jupyter```.
 
+In some rare cases prefect deployment struggles to read from minio. In this case please delete ```./jupyter/scripts/main_flow_deployment.yaml``` file and run ```docker-compose build``` from the root folder.
+
 ## What could be improved
 - add grafana and evidently for model monitoring.
