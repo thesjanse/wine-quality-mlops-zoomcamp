@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" modified="2023-08-12T12:59:33.864Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="adDG9GypR5fwD2-vaZ6H" version="21.6.5">
+  <diagram name="Page-1" id="dA-IXYMSH2vmlCDXRlRs">
+    <mxGraphModel dx="1434" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-1" value="Server" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://spark.apache.org/images/mlflow-logo.png;imageBorder=default;" parent="1" vertex="1">
+          <mxGeometry x="454" y="290.84999999999997" width="142" height="76.99" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-2" value="Wine Prediction Service" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" parent="1" vertex="1">
+          <mxGeometry x="368.62999999999994" y="440" width="85.37" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-3" value="minio s3 bucket" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F8624;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.bucket;" parent="1" vertex="1">
+          <mxGeometry x="250" y="290" width="75" height="78" as="geometry" />
+        </mxCell>
+        <UserObject label="archive.ics.uci.edu" id="VPq9NI1qeD9gLQ_wtsTS-4">
+          <mxCell style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.website_generic;pointerEvents=1;" parent="1" vertex="1">
+            <mxGeometry x="60" y="290" width="90" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-6" value="Server &amp; Agent" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://seekvectorlogo.com/wp-content/uploads/2023/03/prefect-technologies-inc-vector-logo.png;imageBorder=default;" parent="1" vertex="1">
+          <mxGeometry x="676.43" y="296" width="120" height="66.67" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-8" value="upload source data" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png;" parent="1" vertex="1">
+          <mxGeometry x="160" y="220.00000000000003" width="70" height="76.71" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=1.044;exitY=0.488;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-4" target="VPq9NI1qeD9gLQ_wtsTS-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="280" as="sourcePoint" />
+            <mxPoint x="530" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-10" value="Backend" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/databases/Azure_Database_PostgreSQL_Server.svg;" parent="1" vertex="1">
+          <mxGeometry x="608.9300000000001" y="110" width="67.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-11" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=-0.015;entryY=0.611;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-1" target="VPq9NI1qeD9gLQ_wtsTS-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="330" as="sourcePoint" />
+            <mxPoint x="510" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-12" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-1" target="VPq9NI1qeD9gLQ_wtsTS-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="330" as="sourcePoint" />
+            <mxPoint x="510" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-13" value="experiments &amp; artifacts" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png;" parent="1" vertex="1">
+          <mxGeometry x="355" y="220.00000000000003" width="70" height="76.71" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-14" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.994;entryY=0.611;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-6" target="VPq9NI1qeD9gLQ_wtsTS-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="532" y="303" as="sourcePoint" />
+            <mxPoint x="618" y="175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-6" target="VPq9NI1qeD9gLQ_wtsTS-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="330" as="sourcePoint" />
+            <mxPoint x="510" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-16" value="Train &amp;amp; Register&lt;br&gt;Best Model" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="576" y="378" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VPq9NI1qeD9gLQ_wtsTS-17" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.48;entryY=-0.014;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-1" target="VPq9NI1qeD9gLQ_wtsTS-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="330" as="sourcePoint" />
+            <mxPoint x="510" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vTs5pBWy1mmYWl0EfCqO-1" value="Model Monitoring" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/other/Grafana.svg;" vertex="1" parent="1">
+          <mxGeometry x="479.92" y="40" width="90.15" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vTs5pBWy1mmYWl0EfCqO-2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.999;entryY=0.229;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.001;exitY=0.378;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-10" target="vTs5pBWy1mmYWl0EfCqO-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="430" as="sourcePoint" />
+            <mxPoint x="450" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vTs5pBWy1mmYWl0EfCqO-3" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.012;entryY=0.514;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="VPq9NI1qeD9gLQ_wtsTS-13" target="vTs5pBWy1mmYWl0EfCqO-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="430" as="sourcePoint" />
+            <mxPoint x="450" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
