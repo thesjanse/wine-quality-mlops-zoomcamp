@@ -1,8 +1,8 @@
 import requests
-import pytest
 
 
 def test_service():
+    """Integration test for the prediction endpoint."""
     request = {
         "volatile acidity": 0.7,
         "citric acid": 0.0,
@@ -16,5 +16,5 @@ def test_service():
         "quality": 5
     }
 
-    actual = requests.post(url, json=request).json()
+    actual = requests.post(url, json=request, timeout=5).json()
     assert actual == expected

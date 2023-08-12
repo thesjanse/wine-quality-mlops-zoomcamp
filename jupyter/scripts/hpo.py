@@ -1,10 +1,10 @@
+import os
+import pickle
 import argparse
 import boto3
 import mlflow
 import optuna
-import os
 import pandas as pd
-import pickle
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -33,7 +33,7 @@ def read_from_s3(bucket_name, filename: str) -> pd.DataFrame:
 
     Returns:
         Dataframe object."""
-    s3 = boto3.resource("s3", 
+    s3_resource = boto3.resource("s3",
         endpoint_url=S3_ENDPOINT,
         aws_access_key_id=MINIO_ACCESS_KEY,
         aws_secret_access_key=MINIO_SECRET_KEY,
@@ -41,15 +41,16 @@ def read_from_s3(bucket_name, filename: str) -> pd.DataFrame:
         config=boto3.session.Config(signature_version="s3v4"),
         verify=False
     )
-    df = pickle.loads(
-        s3.Object(bucket_name=bucket_name, key=filename)\
+    data = pickle.loads(
+        s3_resource.Object(bucket_name=bucket_name, key=filename)\
         .get()["Body"].read()
     )
 
-    return df
+    return data
 
 
 def run_optimization(n_trials: int):
+    # pylint: disable=redefined-outer-name
     """Run search for n_trials to find
     the best random forest classifier model
     Keyword Arguments:

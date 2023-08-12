@@ -1,11 +1,12 @@
-import boto3
 import io
 import os
-import pandas as pd
 import pickle
+from zipfile import ZipFile
+
+import boto3
+import pandas as pd
 import requests
 
-from zipfile import ZipFile
 
 URL = "https://archive.ics.uci.edu/static/public/186/wine+quality.zip"
 FILENAME = "winequality-red.csv"
@@ -23,13 +24,13 @@ def read_data(url, filename: str) -> pd.DataFrame:
 
     Returns:
         A dataframe object with wine data."""
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
     if response.ok is True:
-        z = ZipFile(io.BytesIO(response.content))
-        df = pd.read_csv(z.open(name=filename), header=0, delimiter=";")
+        zip_file = ZipFile(io.BytesIO(response.content))
+        data = pd.read_csv(zip_file.open(name=filename), header=0, delimiter=";")
     else:
         raise ValueError("Response was not successful!")
-    return df
+    return data
 
 
 def save_to_s3(bucket_name, filename: str, dataframe: pd.DataFrame) -> None:
@@ -41,7 +42,7 @@ def save_to_s3(bucket_name, filename: str, dataframe: pd.DataFrame) -> None:
 
     Returns:
         None"""
-    s3 = boto3.resource("s3", 
+    s3_resource = boto3.resource("s3",
         endpoint_url=S3_ENDPOINT,
         aws_access_key_id=MINIO_ACCESS_KEY,
         aws_secret_access_key=MINIO_SECRET_KEY,
@@ -49,7 +50,7 @@ def save_to_s3(bucket_name, filename: str, dataframe: pd.DataFrame) -> None:
         config=boto3.session.Config(signature_version="s3v4"),
         verify=False
     )
-    s3.Object(
+    s3_resource.Object(
         bucket_name=bucket_name,
         key=filename
     ).put(Body=pickle.dumps(dataframe))
