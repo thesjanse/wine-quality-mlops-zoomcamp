@@ -3,7 +3,7 @@
 ###
 name: rfc-red-wine
 description: null
-version: 702a3b35c63c637968743f2f41e9feb6
+version: 90907ff42bf5879b5efd2d127d4a7394
 # The work queue that will handle this deployment's runs
 work_queue_name: red-wine
 work_pool_name: default-agent-pool
@@ -29,19 +29,19 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
-  _block_document_id: fd7d57c1-f131-4820-9c54-7d98f324f73d
-  _block_document_name: anonymous-5e70d9df-e699-4d6e-a565-c7f8edfabe40
+  _block_document_id: f902bbce-e0d9-41d0-9aa0-d9a99ad634c0
+  _block_document_name: anonymous-516702e7-ac8f-45f4-8006-5441b7d4c553
   _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
 storage:
   basepath: s3://mlflow-artifacts
   settings:
-    key: NZk2MliAyBDsjksN2TVB
-    secret: WfZQZxJ6Cj0wboA3ld0yT6hGWGqz9WRTGxU9uPhR
+    key: minio
+    secret: minio_root
     client_kwargs:
       endpoint_url: http://minio:9000
-  _block_document_id: 74b342c5-c6d8-4478-bfff-65a6e8662378
+  _block_document_id: 205e3a3b-228e-48cd-9fd5-032189a0c48b
   _block_document_name: minio
   _is_anonymous: false
   block_type_slug: remote-file-system
@@ -84,4 +84,4 @@ parameter_openapi_schema:
       type: string
   required: null
   definitions: null
-timestamp: '2023-08-07T20:09:04.064619+00:00'
+timestamp: '2023-08-12T21:51:33.061550+00:00'

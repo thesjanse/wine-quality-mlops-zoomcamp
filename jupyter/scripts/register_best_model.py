@@ -17,8 +17,8 @@ mlflow.set_tracking_uri(os.getenv("MLFLOW_SITE_URL"))
 mlflow.set_experiment("red-wine-quality-production")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_ENDPOINT = os.getenv("MLFLOW_S3_ENDPOINT_URL")
-MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
-MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 FILENAME = "winequality-red"
 EXPERIMENT_NAME = "red-wine-quality-hyperopt"
 SEED = 0

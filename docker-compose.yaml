@@ -16,8 +16,8 @@ services:
       ARTIFACT_ROOT: ${ARTIFACT_ROOT}
       MLFLOW_SITE_URL: ${MLFLOW_SITE_URL}
       MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
-      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
-      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
       PREFECT_API_URL: ${PREFECT_AGENT_API_URL}
     container_name: "jupyter_notebook"
     command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
@@ -49,8 +49,8 @@ services:
       MLFLOW_SITE_URL: ${MLFLOW_SITE_URL}
       MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
       S3_BUCKET_NAME: ${S3_BUCKET_NAME}
-      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
-      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
       PREFECT_API_URL: ${PREFECT_AGENT_API_URL}
       EXTRA_PIP_PACKAGES: fsspec
     depends_on:
@@ -67,8 +67,8 @@ services:
       BACKEND_URI: ${BACKEND_URI}
       MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
       ARTIFACT_ROOT: ${ARTIFACT_ROOT}
-      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
-      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
     depends_on:
       - postgres
       - minio
@@ -97,9 +97,24 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
-      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
     command: server --console-address ":9001" /data
+
+  create_buckets:
+    image: minio/mc
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+      MLFLOW_S3_ENDPOINT_URL: ${MLFLOW_S3_ENDPOINT_URL}
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio ${MLFLOW_S3_ENDPOINT_URL} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD};
+      /usr/bin/mc mb myminio/${S3_BUCKET_NAME};
+      /usr/bin/mc policy download myminio/${S3_BUCKET_NAME};
+      exit 0;
+      "
 
   deployment:
     build:
