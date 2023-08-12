@@ -2,7 +2,7 @@ FROM jupyter/datascience-notebook:python-3.11
 
 USER $NB_UID
 RUN conda install --quiet --yes \
-    's3fs' \
+    's3fs=0.4.2' \
     'pydantic=1.10.12' \
     'prefect=2.10.13' \
     'mlflow=2.3.2' \

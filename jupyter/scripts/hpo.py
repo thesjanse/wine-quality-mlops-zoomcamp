@@ -18,8 +18,8 @@ mlflow.set_experiment("red-wine-quality-hyperopt")
 FILENAME = "winequality-red"
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_ENDPOINT = os.getenv("MLFLOW_S3_ENDPOINT_URL")
-MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
-MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 SEED = 0
 TARGET = "quality"
 FEATURES = ["volatile acidity", "citric acid", "sulphates", "alcohol"]
@@ -35,8 +35,8 @@ def read_from_s3(bucket_name, filename: str) -> pd.DataFrame:
         Dataframe object."""
     s3_resource = boto3.resource("s3",
         endpoint_url=S3_ENDPOINT,
-        aws_access_key_id=MINIO_ACCESS_KEY,
-        aws_secret_access_key=MINIO_SECRET_KEY,
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
         aws_session_token=None,
         config=boto3.session.Config(signature_version="s3v4"),
         verify=False
